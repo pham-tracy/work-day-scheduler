@@ -7,7 +7,7 @@ var currentHour = moment().hour();
 console.log(currentHour);
 
 // Work day hours in military time to compare to currentHour variable
-var hours = ["9", "10", "11", "12", "13", "14", "15", "16", "17"];
+var hours = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 console.log(hours);
 
 // Hours to display on scheduler time blocks
@@ -65,15 +65,12 @@ for (var i = 0; i < hours.length; i++) {
 
   // Changes the color of each text area depending on the current time
   // Current time displays as red
-  if (currentHour == hours[i]) {
+  if (currentHour === hours[i]) {
     textArea.classList.add("present");
 
     // Future times displays as green
   } else if (currentHour < hours[i]) {
     textArea.classList.add("future");
-
-    console.log(currentHour);
-    console.log(hours[i]);
 
     // Past times displays as gray
   } else if (currentHour > hours[i]) {
