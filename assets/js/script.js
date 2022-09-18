@@ -1,80 +1,119 @@
-var currentDay = moment().format("dddd, MMMM do YYYY");
-
+// Displays current day at the header
+var currentDay = moment().format("dddd, MMMM D, YYYY");
 $("#currentDay").text(currentDay);
 
-var currentHour = moment().format("ha");
+// Current hour in military time
+var currentHour = moment().hour();
 console.log(currentHour);
 
-var hours = ["9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm"];
-
-var container = $(".time-block");
-
-// User inputted events that will be saved to user storage
-var events = [];
-
+// Work day hours in military time to compare to currentHour variable
+var hours = ["9", "10", "11", "12", "13", "14", "15", "16", "17"];
 console.log(hours);
 
-// Prints time to table rows with information
+// Hours to display on scheduler time blocks
+var showHours = [
+  "9am",
+  "10am",
+  "11am",
+  "12pm",
+  "1pm",
+  "2pm",
+  "3pm",
+  "4pm",
+  "5pm",
+];
 
+// Container for work day scheduler elements
+var container = $(".time-block");
+
+// Variables for all save buttons
+var allSaveBtn = document.getElementsByTagName("button");
+
+// For loop for each time block
 for (var i = 0; i < hours.length; i++) {
-  //   console.log(hours[i]);
+  console.log(hours[i]);
 
-  var tableRow = document.createElement("tr");
+  // Creates schedule elements for each time block
+  var divRow = document.createElement("div");
   var hour = document.createElement("p");
   var textArea = document.createElement("textarea");
   var saveBtn = document.createElement("button");
+  var iButton = document.createElement("i");
 
-  // Sets class and IDs for rows, hours, text area, save buttons
-  tableRow.setAttribute("class", "row");
-  tableRow.setAttribute("id", "row-" + (i + 9));
+  // Sets classes and IDs for rows, hours, text area, save buttons
+  divRow.setAttribute("class", "row");
+  divRow.setAttribute("id", "row-" + (i + 9));
   hour.setAttribute("class", "hour col-2");
   hour.setAttribute("id", "hour-" + (i + 9));
-  textArea.setAttribute("class", "textarea col-8");
+  textArea.setAttribute("class", " textarea col-8");
   textArea.setAttribute("id", "textarea-" + (i + 9));
   saveBtn.setAttribute("class", "saveBtn col-2");
   saveBtn.setAttribute("id", "saveBtn-" + (i + 9));
+  iButton.setAttribute("class", "fa fa-save");
 
-  // Displays hours
-  hour.textContent = hours[i];
+  // Displays hours in AM/PM format
+  hour.textContent = showHours[i];
 
-  // Appends rows, hours, text area, save button to document
-  container.append(tableRow);
-  tableRow.append(hour);
-  tableRow.append(textArea);
-  tableRow.append(saveBtn);
+  // Appends rows, hours, text areas, save buttons to parent elements.
+  container.append(divRow);
+  divRow.append(hour);
+  divRow.append(textArea);
+  divRow.append(saveBtn);
+  saveBtn.append(iButton);
 
-  // Save button text
+  // TODO: check if these IF statements works tomorrow <  or >
 
-  saveBtn.textContent = "Save";
+  // Changes the color of each text area depending on the current time
+  // Current time displays as red
+  if (currentHour == hours[i]) {
+    textArea.classList.add("present");
 
-  //  saveBtn.addEventListener("click", addEvent);
+    // Future times displays as green
+  } else if (currentHour < hours[i]) {
+    textArea.classList.add("future");
 
-  // If the current time is noww, change textArea to present class, which shows as red
-  if (currentHour === hours[i]) {
-    textArea.setAttribute("class", "textarea col-8 present");
-  }
-  //   console.log(currentHour);
-  //   console.log(hours[i]);
-
-  // If time is in the future, change textArea to future class, which shows as gray
-  if (currentHour < hours[i]) {
-    textArea.setAttribute("class", "textarea col-8 future");
     console.log(currentHour);
     console.log(hours[i]);
-  }
 
-  // If time is in the past, change textArea to past class, which shows as gray
-  if (currentHour > hours[i]) {
-    textArea.setAttribute("class", "textarea col-8 past");
-    // console.log(hours[i]);
+    // Past times displays as gray
+  } else if (currentHour > hours[i]) {
+    textArea.classList.add("past");
   }
 }
 
-var saveBtn9 = document.getElementById("saveBtn-9");
+// Variables for each time block text area
 var textArea9 = document.getElementById("textarea-9");
-function addEvent() {
-  localStorage.setItem("event", textArea9.value);
+var textArea10 = document.getElementById("textarea-10");
+var textArea11 = document.getElementById("textarea-11");
+var textArea12 = document.getElementById("textarea-12");
+var textArea13 = document.getElementById("textarea-13");
+var textArea14 = document.getElementById("textarea-14");
+var textArea15 = document.getElementById("textarea-15");
+var textArea16 = document.getElementById("textarea-16");
+var textArea17 = document.getElementById("textarea-17");
+
+// Every time the save button is clicked, the text input is saved to local storage
+for (var i = 0; i < hours.length; i++) {
+  allSaveBtn[i].addEventListener("click", function () {
+    localStorage.setItem("9am", textArea9.value);
+    localStorage.setItem("10am", textArea10.value);
+    localStorage.setItem("11am", textArea11.value);
+    localStorage.setItem("12pm", textArea12.value);
+    localStorage.setItem("1pm", textArea13.value);
+    localStorage.setItem("2pm", textArea14.value);
+    localStorage.setItem("3pm", textArea15.value);
+    localStorage.setItem("4pm", textArea16.value);
+    localStorage.setItem("5pm", textArea17.value);
+  });
 }
 
-saveBtn9.addEventListener("click", addEvent);
-textArea9.textContent = localStorage.getItem("event");
+// Displays saved local storage input on each text area
+textArea9.value = localStorage.getItem("9am");
+textArea10.value = localStorage.getItem("10am");
+textArea11.value = localStorage.getItem("11am");
+textArea12.value = localStorage.getItem("12pm");
+textArea13.value = localStorage.getItem("1pm");
+textArea14.value = localStorage.getItem("2pm");
+textArea15.value = localStorage.getItem("3pm");
+textArea16.value = localStorage.getItem("4pm");
+textArea17.value = localStorage.getItem("5pm");
