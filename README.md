@@ -14,8 +14,6 @@ N/A
 
 Visit the project website here: https://pham-tracy.github.io/work-day-scheduler/
 
-## Screenshots
-
 ![work-day-scheduler](/assets/images/work-day-scheduler-screenshot.png)
 
 ## Credits

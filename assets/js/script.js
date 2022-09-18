@@ -61,8 +61,6 @@ for (var i = 0; i < hours.length; i++) {
   divRow.append(saveBtn);
   saveBtn.append(iButton);
 
-  // TODO: check if these IF statements works tomorrow <  or >
-
   // Changes the color of each text area depending on the current time
   // Current time displays as red
   if (currentHour === hours[i]) {
