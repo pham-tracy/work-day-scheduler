@@ -14,8 +14,6 @@ N/A
 
 Visit the project website here: https://pham-tracy.github.io/work-day-scheduler/
 
-![work-day-scheduler](/assets/images/work-day-scheduler-screenshot.png)
-
 ## Credits
 
 Starter code was provided by Coding-Boot-Camp: https://github.com/coding-boot-camp/super-disco
